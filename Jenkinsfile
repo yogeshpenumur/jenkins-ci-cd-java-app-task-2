@@ -9,7 +9,7 @@ pipeline {
     }
 }
 
-    stage('Back-end') {
+    stage('build') {
       agent {
         docker { image 'maven:3.8.1-adoptopenjdk-11' }
       }
@@ -17,6 +17,12 @@ pipeline {
         sh 'mvn clean package'
       }
     }
+    stage("test"){
+      agent any
+	    steps{
+		    echo 'Testing....'
+	    }
+    }  
     stage('Create the image') {
         agent any
             steps {
@@ -33,7 +39,7 @@ pipeline {
 		    sh "docker run -d -p 9990:8080 --name mycontainer yogeshpenumur/img:${BUILD_NUMBER}"
             }
         }
-        stage ('webapps '){
+        stage ('deploy '){
             agent any 
             steps{
                 sh '''#!/bin/bash
