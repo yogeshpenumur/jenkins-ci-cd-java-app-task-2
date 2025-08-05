@@ -4,7 +4,7 @@ pipeline {
       stage ('git-clone'){
           agent any
           steps {
-              git 'https://github.com/yogeshpenumur/Jenkins-pipelines-examples'
+              git 'https://github.com/yogeshpenumur/jenkins-ci-cd-java-app-task-2'
           }
       }
     stage('Back-end') {
