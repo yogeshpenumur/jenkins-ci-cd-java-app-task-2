@@ -1,12 +1,14 @@
 pipeline {
   agent none
   stages {
-      stage ('git-clone'){
-          agent any
-          steps {
-              git 'https://github.com/yogeshpenumur/jenkins-ci-cd-java-app-task-2'
-          }
-      }
+      stage('Clone Repository') {
+    agent any
+    steps {
+        echo ' Cloning the repository...'
+        git branch: 'main', url: 'https://github.com/yogeshpenumur/jenkins-ci-cd-java-app-task-2'
+    }
+}
+
     stage('Back-end') {
       agent {
         docker { image 'maven:3.8.1-adoptopenjdk-11' }
