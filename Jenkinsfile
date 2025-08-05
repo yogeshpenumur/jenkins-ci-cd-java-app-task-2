@@ -22,15 +22,7 @@ pipeline {
 				sh "docker build . -t yogeshpenumur/img:${BUILD_NUMBER}"
             }
         }
-    stage('push-docker'){
-    agent any
-    steps {
-        withCredentials([string(credentialsId: 'docker-cr', variable: 'DOCKER_PASS')]) {
-            sh "docker login -u yogeshpenumur2002@gmail.com -p ${DOCKER_PASS}"
-            sh "docker push yogeshpenumur/img:${BUILD_NUMBER}"
-        }
-    }
-}
+   
         stage('Create the container') {
             agent any
             steps {
