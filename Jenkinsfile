@@ -43,19 +43,19 @@ CONTAINER_NAME="mycontainer"
 
 # Check if the container is running
 if ! docker ps --format \'{{.Names}}\' | grep -q "^${CONTAINER_NAME}$"; then
-  echo "❌ Container \'${CONTAINER_NAME}\' is not running."
+  echo "Container \'${CONTAINER_NAME}\' is not running."
   exit 1
 fi
 
-echo "✅ Copying webapps.dist contents to webapps inside \'${CONTAINER_NAME}\'..."
+echo " Copying webapps.dist contents to webapps inside \'${CONTAINER_NAME}\'..."
 
 # Run the copy command inside the container
 docker exec "${CONTAINER_NAME}" bash -c "cp -r /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps/"
 
 if [ $? -eq 0 ]; then
-  echo "✅ Successfully copied webapps.dist to webapps."
+  echo " Successfully copied webapps.dist to webapps."
 else
-  echo "❌ Failed to copy files."
+  echo " Failed to copy files."
 fi
 '''
 
